@@ -481,7 +481,7 @@ watch(
                     <ElSpace class="ml-12px">
                       <ElButton @click="addQuery(index)">
                         <template #icon>
-                          <icon-ic:round-plus class="align-sub text-icon" />
+                          <icon-ic-round-plus class="align-sub text-icon" />
                         </template>
                       </ElButton>
                       <ElButton @click="removeQuery(index)">
@@ -527,7 +527,7 @@ watch(
                     <ElSpace class="ml-12px">
                       <ElButton @click="addButton(index)">
                         <template #icon>
-                          <icon-ic:round-plus class="align-sub text-icon" />
+                          <icon-ic-round-plus class="align-sub text-icon" />
                         </template>
                       </ElButton>
                       <ElButton @click="removeButton(index)">

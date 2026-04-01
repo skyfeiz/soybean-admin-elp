@@ -83,26 +83,26 @@ defineExpose({ selectNode, graph: graphRef });
 <template>
   <div class="relative">
     <!-- canvas toolbar -->
-    <div class="absolute left-0 right-0 z-1 flex items-center items-stretch justify-between">
+    <div class="absolute left-0 right-0 z-1 flex items-stretch justify-between">
       <ElButtonGroup size="small" class="bg-white!">
         <ElButton @click="zoomOut">
-          <icon-mingcute:zoom-out-line />
+          <icon-mingcute-zoom-out-line />
         </ElButton>
         <ElButton @click="zoomIn">
-          <icon-mingcute:zoom-in-line />
+          <icon-mingcute-zoom-in-line />
         </ElButton>
         <ElButton @click="resetZoom">
-          <icon-icon-park-outline:equal-ratio />
+          <icon-icon-park-outline-equal-ratio />
         </ElButton>
         <ElButton @click="fitZoom">
-          <icon-gg:ratio />
+          <icon-gg-ratio />
         </ElButton>
       </ElButtonGroup>
       <div class="flex-center gap-12px">
         <ElPopover placement="bottom-end" :width="200" :animated="false">
           <template #reference>
             <ElButton size="small" class="bg-white!">
-              <icon-fe:question />
+              <icon-fe-question />
             </ElButton>
           </template>
           <div class="flex-col gap-8px">
@@ -111,8 +111,8 @@ defineExpose({ selectNode, graph: graphRef });
               <ElCol v-for="(config, status) in nodeStatus" :key="status" :span="12" class="mb-8px flex-center">
                 <ElTag size="small" round :bordered="false">
                   <template #default>
-                    <icon-f7:flag-circle-fill v-if="status === 'MILESTONE'" :style="{ color: config.color }" />
-                    <icon-f7:circle-fill v-else :style="{ color: config.color }" />
+                    <icon-f7-flag-circle-fill v-if="status === 'MILESTONE'" :style="{ color: config.color }" />
+                    <icon-f7-circle-fill v-else :style="{ color: config.color }" />
                     {{ config.type }}
                   </template>
                 </ElTag>

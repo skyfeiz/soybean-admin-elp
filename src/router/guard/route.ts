@@ -1,10 +1,4 @@
-import type {
-  LocationQueryRaw,
-  NavigationGuardNext,
-  RouteLocationNormalized,
-  RouteLocationRaw,
-  Router
-} from 'vue-router';
+import type { LocationQueryRaw, RouteLocationNormalized, RouteLocationRaw, Router } from 'vue-router';
 import type { RouteKey, RoutePath } from '@elegant-router/types';
 import { useAuthStore } from '@/store/modules/auth';
 import { useRouteStore } from '@/store/modules/route';
@@ -17,12 +11,11 @@ import { getRouteName } from '@/router/elegant/transform';
  * @param router router instance
  */
 export function createRouteGuard(router: Router) {
-  router.beforeEach(async (to, from, next) => {
+  router.beforeEach(async (to, from) => {
     const location = await initRoute(to);
 
     if (location) {
-      next(location);
-      return;
+      return location;
     }
 
     const authStore = useAuthStore();
@@ -40,35 +33,26 @@ export function createRouteGuard(router: Router) {
 
     // if it is login route when logged in, then switch to the root page
     if (to.name === loginRoute && isLogin) {
-      const redirect = to.query?.redirect as string;
-      if (redirect) {
-        next({ path: redirect });
-      } else {
-        next({ name: rootRoute });
-      }
-      return;
+      return { name: rootRoute };
     }
 
     // if the route does not need login, then it is allowed to access directly
     if (!needLogin) {
-      handleRouteSwitch(to, from, next);
-      return;
+      return handleRouteSwitch(to, from);
     }
 
     // the route need login but the user is not logged in, then switch to the login page
     if (!isLogin) {
-      next({ name: loginRoute, query: { redirect: to.fullPath } });
-      return;
+      return { name: loginRoute, query: { redirect: to.fullPath } };
     }
 
     // if the user is logged in but does not have authorization, then switch to the 403 page
     if (!hasAuth) {
-      next({ name: noAuthorizationRoute });
-      return;
+      return { name: noAuthorizationRoute };
     }
 
     // switch route normally
-    handleRouteSwitch(to, from, next);
+    return handleRouteSwitch(to, from);
   });
 }
 
@@ -77,7 +61,7 @@ export function createRouteGuard(router: Router) {
  *
  * @param to to route
  */
-async function initRoute(to: RouteLocationNormalized): Promise<RouteLocationRaw | null> {
+async function initRoute(to: RouteLocationNormalized): Promise<RouteLocationRaw | undefined> {
   const routeStore = useRouteStore();
 
   const notFoundRoute: RouteKey = 'not-found';
@@ -107,7 +91,7 @@ async function initRoute(to: RouteLocationNormalized): Promise<RouteLocationRaw 
     if (to.meta.constant && !isNotFoundRoute) {
       routeStore.onRouteSwitchWhenNotLoggedIn();
 
-      return null;
+      return undefined;
     }
 
     // if the user is not logged in, then switch to the login page
@@ -148,7 +132,7 @@ async function initRoute(to: RouteLocationNormalized): Promise<RouteLocationRaw 
   // the auth route is initialized
   // it is not the "not-found" route, then it is allowed to access
   if (!isNotFoundRoute) {
-    return null;
+    return undefined;
   }
 
   // it is captured by the "not-found" route, then check whether the route exists
@@ -163,20 +147,17 @@ async function initRoute(to: RouteLocationNormalized): Promise<RouteLocationRaw 
     return location;
   }
 
-  return null;
+  return undefined;
 }
 
-function handleRouteSwitch(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
+function handleRouteSwitch(to: RouteLocationNormalized, from: RouteLocationNormalized) {
   // route with href
   if (to.meta.href) {
     window.open(to.meta.href, '_blank');
 
-    next({ path: from.fullPath, replace: true, query: from.query, hash: from.hash });
-
-    return;
+    return { path: from.fullPath, replace: true, query: from.query, hash: to.hash };
   }
-
-  next();
+  return undefined;
 }
 
 function getRouteQueryOfLoginRoute(to: RouteLocationNormalized, routeHome: RouteKey) {

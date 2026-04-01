@@ -144,7 +144,7 @@ function isTableColumnHasTitle<T>(column: UI.TableColumn<T>): boolean {
           <p>Excel导出</p>
           <ElButton plain type="primary" @click="exportExcel">
             <template #icon>
-              <icon-file-icons:microsoft-excel class="text-icon" />
+              <icon-file-icons-microsoft-excel class="text-icon" />
             </template>
             导出excel
           </ElButton>
