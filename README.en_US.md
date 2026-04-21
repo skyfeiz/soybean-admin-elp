@@ -144,6 +144,7 @@ pnpm build
 - [FastSoyAdmin](https://github.com/sleep1223/fast-soy-admin): A modern Management Platform based on FastAPI+Vue3+Naive UI.
 - [ba](https://github.com/xiatianYa/Ba-Server): Backend service docking with soybean admin based on goFrame framework, adapted to dynamic routing, and interface authentication permissions.
 - [soybean-admin-go](https://github.com/WgoW/soybean-admin-go):A Go backend service developed based on the Gin and GORM frameworks, integrated with the example branch of Soybean Admin. It supports dynamic routing and API permission authentication.
+- [soybean-admin-element-plus-skill](https://github.com/a596544022/soybean-admin-element-plus-skill): This is a skill package for quickly generating standard CRUD management pages in soybean-admin-element-plus projects, or other Vue 3 + Element Plus projects.
 
 ## How to Contribute
 

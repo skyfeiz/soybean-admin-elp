@@ -71,7 +71,6 @@
 - [地址](https://docs.soybeanjs.cn)
 - [旧版文档](https://legacy-docs.soybeanjs.cn)
 
-
 ## 合作事项
 
 我们非常感谢大家对 [`SoybeanAdmin`](https://github.com/soybeanjs/soybean-admin) 的支持！为了进一步回馈社区，并助力企业和开发者实现个性化需求，我们现提供多种合作服务，期待与您携手共赢。
@@ -169,7 +168,7 @@ pnpm build
 - [FastSoyAdmin](https://github.com/sleep1223/fast-soy-admin): 基于 FastAPI+Vue3+Naive UI 的现代化轻量管理平台.
 - [ba](https://github.com/xiatianYa/Ba-Server): 基于goFrame框架开发的后端服务对接soybean-admin,适配动态路由,接口鉴权限。
 - [soybean-admin-go](https://github.com/WgoW/soybean-admin-go):基于gin+gorm框架开发的go语言后端服务对接soybean-admin的example分支,适配动态路由,接口鉴权限。
-
+- [soybean-admin-element-plus-skill](https://github.com/a596544022/soybean-admin-element-plus-skill): 这是一个用于在 soybean-admin-element-plus 项目，或其他 Vue 3 + Element Plus 项目中快速生成标准 CRUD 管理页面的 skill 包。
 
 ## 如何贡献
 
